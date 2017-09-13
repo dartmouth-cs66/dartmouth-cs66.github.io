@@ -1,0 +1,301 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+
+$spacing-unit:     30px;
+%vertical-rhythm {
+    margin-bottom: $spacing-unit / 2;
+}
+
+// Import partials from `sass_dir` (defaults to `_sass`)
+@import
+        "cayman",
+        "syntax-highlighting"
+;
+
+.main-content {
+  table {
+    border:0px;
+    margin-left:25px;
+    text-align:center;
+    tr {
+      border:0px;
+    }
+    td {
+      border:0px;
+    }
+  }
+  .rtable {
+    margin-left: 25px;
+  }
+}
+
+
+.rtable {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 3em 0;
+  padding: 0;
+  /*img {
+    width: 100px;
+    height: 100px;
+  }*/
+  min-width: 500px;
+  img {
+    margin: 10px;
+  }
+}
+.rtable-cell {
+  box-sizing: border-box;
+  flex-grow: 1;
+  width: 100%;  // Default to full width
+  /*overflow: hidden; // Or flex might break*/
+  list-style: none;
+  text-align: center;
+}
+
+/* Table column sizing
+================================== */
+.rtable--2cols > .rtable-cell  { width: 50%; }
+.rtable--3cols > .rtable-cell  { width: 33.33%; }
+.rtable--4cols > .rtable-cell  { width: 25%; }
+.rtable--5cols > .rtable-cell  { width: 20%; }
+.rtable--6cols > .rtable-cell  { width: 16.6%; }
+
+
+img.profile {
+  width:100px;
+  border-radius:50%;
+  min-width:100px;
+}
+
+img.large, .large img {
+  width: 90% !important;
+}
+img.medium, .medium img {
+  width: 75% !important;
+}
+img.medium_small, .medium_small img {
+  width: 50% !important;
+}
+
+img.small, .small img {
+  width: 45% !important;
+  /*margin-left: 17.5%;*/
+}
+img.tiny, .tiny img {
+  width: 40% !important;
+  /*margin-left: 17.5%;*/
+}
+
+
+/*lets have us some fancy images*/
+.main-content img.fancy, .fancy img {
+  box-shadow: 0px 3px 6px 1px rgba(0,0,0,0.16), 0px 3px 6px 1px rgba(0,0,0,0.23);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.main-content img.fancy:hover, .fancy img:hover {
+  box-shadow: 0px 14px 28px 3px rgba(0,0,0,0.25), 0px 10px 10px 3px rgba(0,0,0,0.22);
+}
+
+/*lets have some fancy code highlights too*/
+.main-content div.highlighter-rouge, .remark-code {
+  border-radius: 0.3rem;
+  box-shadow: inset 0px 3px 6px 1px rgba(0,0,0,0.15),inset 0px 1px 3px 1px rgba(0,0,0,0.1);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.main-content div.highlighter-rouge:hover, .remark-code:hover {
+  box-shadow: inset 0px 3px 10px 3px rgba(0,0,0,0.15), inset 0px 1px 6px 3px rgba(0,0,0,0.05);
+}
+
+/*need to override background to show box shadow*/
+.main-content .highlighter-rouge pre.highlight, .remark-code, .remark-inline-code {
+  background: rgba(238,238,255, 0.33) !important;
+}
+/*need to override background to show box shadow*/
+.main-content .example.highlighter-rouge pre.highlight, .remark-code, .remark-inline-code {
+  background: rgba(145, 145, 157, 0.19) !important;
+}
+
+
+/*for inline code instead more mild effect*/
+.main-content code.highlighter-rouge, .remark-inline-code {
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+}
+.main-content code.highlighter-rouge:hover, .remark-inline-code:hover {
+  background: rgba(250,175,186, 0.33) !important;
+}
+
+
+/* for codepen embeds */
+.cp_embed_iframe, .codepanel {
+  box-shadow: 0px 3px 6px 1px rgba(0,0,0,0.16), 0px 3px 6px 1px rgba(0,0,0,0.23);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.cp_embed_iframe:hover {
+  box-shadow: 0px 14px 28px 3px rgba(0,0,0,0.25), 0px 10px 10px 3px rgba(0,0,0,0.22);
+}
+
+
+
+.highlight .err {
+  color: grey !important;
+  background: rgba(1,1,1,0);
+}
+
+.example .highlight {
+  background: rgba(255,238,238, .33) !important;
+}
+
+#slides-button {
+    cursor: pointer;
+}
+
+#slidesbutton {
+  color: rgba(5, 5, 5, 0.7);
+  background-color: rgba(5, 5, 5, 0.08);
+  border-color: rgba(5, 5, 5, 0.2);
+  margin-top: 2rem;
+  margin-left: 4rem;
+  display: inline;
+}
+
+.remark-slide-number {
+    top: 12px;
+    bottom: 0;
+    color: #daebf4;
+}
+
+.slide {
+  display: none;
+
+  &.shown {
+    display: block;
+  }
+}
+
+.remark-slide .remark-slide-content img {
+  //prevent stupid image from going offscreen
+  width: 100%;
+}
+
+.remark-slide .remark-slide-content {
+  background-repeat: no-repeat;
+  background-repeat-x: no-repeat;
+  background-repeat-y: no-repeat;
+}
+
+
+.white-background {
+	background: white;
+}
+
+.white-foreground {
+	color: white;
+}
+
+
+.mostly-white{
+	background: rgba(255,255,255,.5);
+}
+
+
+.caption {
+		 font-size: 1rem;
+}
+
+
+.hljs.remark-code, .hljs-tomorrow.remark-code {
+  text-align: left;
+}
+
+.remark-slide-content.center ul, .remark-slide-content.center ol {
+  text-align: left;
+}
+
+
+
+/*
+.remark-slide-container ~ .remark-fading {
+  animation: slideOutDown 1s;
+}
+.remark-visible ~ .remark-slide-container {
+  animation: slideInUp 1s;
+}
+// moving forward
+.remark-fading ~ .remark-visible {
+  animation: slideInDown 1s;
+}
+// moving backward
+.remark-slide-container ~ .remark-visible ~ .remark-fading {
+  animation: slideOutUp 1s;
+}*/
+
+.remark-slide {
+  background: url("../imgs/header.jpg") no-repeat top center;
+  background-color: #fffefa;
+  background-size: contain;
+  padding-top: 75px;
+}
+
+.remark-slide-content {
+  /*background: none;*/
+}
+
+.remark-slide .title {
+  top: 10px;
+  position: absolute;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 45px;
+  font-weight: bold;
+  display: block;
+}
+
+.right {
+  float:right;
+  width:48%;
+}
+
+.right-small {
+  float:right;
+  width:38%;
+}
+
+.right-large {
+  float:right;
+  width:58%;
+}
+
+.left {
+  float:left;
+  width:48%;
+}
+
+.left-small {
+  float:left;
+  width:38%;
+}
+
+.left-large {
+  float:left;
+  width:52%;
+}
+
+
+/*.well {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}*/
