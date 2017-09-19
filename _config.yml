@@ -22,6 +22,8 @@ github_username:  timofei7
 
 # Build settings
 markdown: kramdown
+kramdown:
+  input: GFM
 
 plugins:
   - jemoji
