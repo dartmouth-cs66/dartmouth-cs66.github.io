@@ -125,6 +125,10 @@ Save the scene by clicking File > Save Scenes or by pressing the hotkey combinat
 ### Some Basic Scripting
 Now that we're all oriented with the views, it's time to get our feet wet with some basic scripting. Since we've already been playing around with it, let's add some control to our cube object.
 
+One quick note: the we'll be directly moving our cube by affecting its transform, and not by using physics on its rigidbody. Since we won't be needing the rigidbody, you can go ahead and delete it. Inside the Rigidbody component, click on the gear, called the "Context-Sensitive Gear Menu," in the top right corner, and click "Remove Component".
+
+![](img/gearmenu.png)
+
 How do we do that? Well, we're going to need to create a script and attach it to the cube. There are a couple of ways to do this. We could create the script in the project view and then add it in as a component to the script in the inspector, but that's a lot of clicking.
 
 There's a better way! In the cube's inspector panel, click "Add Component" and scroll to the bottom of the list. There should be an option "New Script". Click on this, and you're given a few options. Let's name our script, "Cube Controller" and make sure the language is set to C Sharp.
