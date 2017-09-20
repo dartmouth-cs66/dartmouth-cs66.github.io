@@ -122,6 +122,103 @@ For now, we should save our scene in an aptly-named folder. Right click on the A
 
 Save the scene by clicking File > Save Scenes or by pressing the hotkey combination `command-s` on Mac or `control-s` on Windows. Call the Scene "Main" and save it in the \_Scenes folder.
 
+### Some Basic Scripting
+Now that we're all oriented with the views, it's time to get our feet wet with some basic scripting. Since we've already been playing around with it, let's add some control to our cube object.
+
+How do we do that? Well, we're going to need to create a script and attach it to the cube. There are a couple of ways to do this. We could create the script in the project view and then add it in as a component to the script in the inspector, but that's a lot of clicking.
+
+There's a better way! In the cube's inspector panel, click "Add Component" and scroll to the bottom of the list. There should be an option "New Script". Click on this, and you're given a few options. Let's name our script, "Cube Controller" and make sure the language is set to C Sharp.
+
+*But I don't know any C!* That's totally fine. C# is an object-oriented version of C developed by Microsoft using the .NET framework. We'll see shortly that it's basically a better version of Java, with which I'm sure you're well-acquainted.
+
+(As an aside, Unity allows us to code in three languages: C#, a Unity flavor of JavaScript called UnityScript, and Boo, which is similar to Python. C# is by far the most powerful and feature-rich, and Unity actually announced in August of 2017 that it would be deprecating support for UnityScript and Boo. For more information, check out their [blog post](https://blogs.unity3d.com/2017/08/11/unityscripts-long-ride-off-into-the-sunset/) on the announcement.)
+
+After you click "Create and Add", Unity will both create the script and attach it as a component to the cube GameObject 🆒 Double-click on the "CubeController" script attribute to open the default IDE (either MonoDevelop on Linux/macOS or VisualStudio on Windows by default).
+
+#### A Note On Linux
+Some Linux users may have an issue opening MonoDevelop automatically. If this is the case, it may be because the script that launches MonoDevelop requires a program called `realpath`. Entering this command in your Terminal and trying again:
+
+```sh
+$ sudo apt-get install realpath
+```
+
+should do the trick.
+
+## Our First Script
+Now that we're in the editor, we can see that Unity has kindly provided us with some template code. It doesn't do anything yet, but we should be familiar with the two functions provided.
+
+```csharp
+// Use this for initialization
+void Start () {
+
+}
+```
+
+`Start()` is a method called at runtime when the program starts up. While you might define some class/instance variables before these methods, you should do all of your initialization in the `Start()` method, as you normally would do in a constructor.
+
+```csharp
+// Update is called once per frame
+void Update () {
+
+}
+```
+
+`Update()` is called at a certain stage of each frame, where it will execute code on GameObjects in the scene. This is particularly useful for making GameObjects react to user input, and it's where we'll be putting all of our code. Go ahead and delete the `Start()` function. We won't need it for now.
+
+### A Responsive Cube
+Alright, go ahead and replace the `Update()` function with the following code:
+```csharp
+void Update () {
+  float horizontal = Input.GetAxis ("Horizontal") * Time.deltaTime;
+
+  gameObject.transform.Translate (new Vector3(horizontal, 0, 0));
+}
+```
+There's a lot of new vocab here, so let's go through it:
+- `Input` is a class used to interface with Unity's input system. It's how we'll get all of our user input. It has some nice classes, like
+- `Input.GetAxis(string)`: this returns the value of the axis of input defined by the string it takes as a parameter. So in our code, `"Horizontal"` means we are telling the method to get all of the user input pertaining to the horizontal axis. It will return some value based on whether or not the left or right arrow keys are being held down.
+- `Time.deltaTime` returns the length of time in seconds it took for the last frame to execute. It makes our code frame-rate independent, so the results of running this code on different computers with different processors should be the same.
+- `gameObject` refers to whichever gameObject this script is attached to. In this case, that's our cube.
+- `transform.Translate()` will move, or translate, the cube by some unit of distance, described as a 3D vector which Unity calls a `Vector3`. Here we are creating a new `Vector3` that moves in the x direction only.
+
+Save the script and return to Unity. Check the game view to make sure that the cube is in sight. Press play and try to move the cube left and right.
+
+It works! But it's a little slow. Head back to the script editor to add some speed.
+
+### Speeding It Up
+There are a few ways to affect the speed. We could do something like:
+```csharp
+  float horizontal = Input.GetAxis ("Horizontal") * Time.deltaTime * 5;
+}
+```
+
+but we don't want magic numbers in our code. We could make a variable...
+
+```csharp
+int speed;
+
+void Start () {
+  speed = 5;
+}
+
+void Update () {
+  float horizontal = Input.GetAxis ("Horizontal") * Time.deltaTime * speed;
+
+  gameObject.transform.Translate (new Vector3(horizontal, 0, 0));
+}
+```
+
+but that's still bad! Every time we wanted to change the speed, we would have to go into the script editor and change it.
+
+Unity does something nice for us. If we declare a variable as `public` in the script, it allows us to edit the value of it directly from the inspector! Make a `public int speed` instance variable (and don't initialize it anywhere!), and multiply the horizontal float value by it in `Update()`. Save the script and return to Unity.
+
+![](img/publicvar.png)
+
+Sweeeeet. But a 0 won't get us very far. Play around with the value and then hit the play button to test!
+
+### Adding Vertical Control
+This is nice and everything, but we can only go in one direction! See if you can add some functionality to also move the cube along a vertical path.
+
 ### And We Are Done!
 Congratulations! You've explored the basics of the Unity Editor, and are ready to build your first game. We've explored:
 
@@ -131,5 +228,22 @@ Congratulations! You've explored the basics of the Unity Editor, and are ready t
 * The Game View, where you can see the game from the player's perspective
 * The Play Button, where you can run the Unity engine on this scene
 * The Project View, where you can view the project's directory tree and all its assets
+* The default IDE and some rudimentary scripting in C#
 
-Keep an eye out for the next short assignment, where we'll be building our first simple game!
+### Extending the Script
+There are lots of opportunities for extra credit here.
+
+- Can you add a feature to rotate the cube if a different button is held down? (You might want to look up the `Input.getKey()` method.)
+- What if we want to change the color of the cube when certain keys are pressed?
+- What about scale?
+- Anything else you can think of?
+
+
+### To Turn In
+- Compile all of your work into a git repo and push the code up to GitHub to a repo called `cs66-sa1-<YourGithubUsername>`
+- Submit a link to your repo with some general comments:
+  - What you did
+  - What worked/didn't work
+  - Any general comments/suggestions
+
+That's it! Keep an eye out for the next short assignment, where we'll be building our first simple game!
