@@ -99,3 +99,71 @@ Save the script and return to the editor. When you get back there, we'll have to
 Play around with these values a bit and test until you find something you like. I used Gravity Scale 2 and Jump Force 6, but you may find something you prefer. Once you're satisfied, you should be able to hop in place after hitting the play button.
 
 ![](img/bouncing.gif)
+
+### Clamping Velocity
+You might notice that if you hit the spacebar multiple times in close succession, the force we are applying makes the bird go up way faster than it should. This is because we are applying essentially a constant force over time. Recall that F=ma. Since force and mass are remaining constant, acceleration also remains constant, and a constant acceleration results in an exponentially increasing velocity.
+
+We like realistic physics, but they have their place, and games like flappy bird ain't it. We want to make sure the player's velocity stays consistently in a specific range, so we want to `clamp` any value to that range. In your `PlayerController.cs` script, add in a public int `maxVelocity`, and add the following lines to your `Update()` function:
+
+```csharp
+rb2d.velocity = new Vector2(
+  rb2d.velocity.x,
+  Mathf.Clamp (rb2d.velocity.y, -maxVelocity, maxVelocity)
+);
+```
+
+This sets the velocity of the player in each frame to stay the same in the x direction but clamps the y direction between the values of -maxVelocity and maxVelocity.
+
+In the editor, play around with the values again until you find something you like, and press play to test.
+
+### Moving Right
+In the final game, there will be obstacles to avoid, and we'll want to move right so we can get to them. What's the best way to get this right-scroll behavior? The easiest is to just initialize the player character to have a constant rightbound velocity. (Recall that x and y velocities are independent of each other--if you have two bullets in a vacuum, you can drop one from ten feet up and fire another straight out of a gun from ten feet up and they'll hit the ground at the same time.)
+
+In `PlayerController.cs`, add a public int called `scrollSpeed` and then add the following to the start function:
+
+```csharp
+rb2d.velocity = new Vector2 (scrollSpeed, 0);
+```
+
+In the editor, set the scrollSpeed to 4. Our bird should now be moving, so the next step is to get the camera to follow it.
+
+## CameraController
+There are a few ways that we can get the camera to follow our player. The quick-and-dirty way is to make the camera a child of the Player object. Since all children are spaced relative to their parents, the camera will move along with the player. Try it out! Drag the Main Camera in the hierarchy over the Player to make it a child of Player. Hit play!
+
+Well, it's close. The camera is following the player all the time, though, and we want it to be fixed in the y-direction. We can't do that with parent-child relationships, but we can do it with a script.
+
+Move the Main Camera back to its own position in the hierarchy. Then, with it selected, add a new script component to it in the inspector, and call it
+`CameraController`. Open the script for editing.
+
+Here's the code for the camera controller:
+
+```csharp
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraController : MonoBehaviour {
+
+    public GameObject player;
+
+    private float offset;
+
+	// Use this for initialization
+	void Start () {
+        offset = transform.position.x - player.transform.position.x;
+	}
+
+	// Update is called once per frame
+	void Update () {
+        transform.position = new Vector3(player.transform.position.x + offset, transform.position.y, transform.position.z);
+	}
+}
+```
+
+This gets the difference of the x coordinates between the player and camera on startup, and then in each frame updates the camera's transform position to move that offset in the x direction. This makes the camera appear fixed relative to the player, but only along the x-axis, which is just what we wanted.
+
+Back in the editor, we're about to see one of the many cool things Unity can do. Recall that we set a variable `public GameObject player` in our script. Like any other public variable, we can set it in our editor. It wants a GameObject, and specifically we want it to point to our `Player` GameObject. With the Main Camera selected in the Inspector, simply drag the Player from the Hierarchy to the space next to Player in the Camera Controller script component. That was a lot of words. Here's a gif:
+
+![](img/drag.gif)
+
+Couldn't be easier! Hit play and make sure it's working.
