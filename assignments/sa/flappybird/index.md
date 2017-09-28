@@ -26,7 +26,6 @@ Let's start by downloading some assets from the Unity Asset Store. Navigate to t
 Once there, search for "2D Sprites Pack". It should be the first result, free, and made by Unity Technologies. Hit the download button, and when the window pops up on your screen to import the assets, select only the eight we'll need for the assignment:
 
 - BirdEnemyDeathSprite
-- BirdEnemyFlapSprite
 - BirdEnemyIdleSprite
 - ColumnShortSprite
 - GrassSprite
@@ -167,3 +166,118 @@ Back in the editor, we're about to see one of the many cool things Unity can do.
 ![](img/drag.gif)
 
 Couldn't be easier! Hit play and make sure it's working.
+
+## Colliders
+In any video game, there needs to be some notion of physical intersections. When a ball hits a player's foot, for example, the ball should respond to the kick by flying away from the foot. Or, when a daring plumber head-butts an inquisitive brick, a coin should emerge from the top. Unity's method of dealing with these collisions is the aptly named Collider.
+
+Colliders are just components of any GameObject, with the special property that if two colliders meet, they should not be allowed to intersect into each other. They'll need to be on any objects that we want this property for, so if we want the bird to stop dead when he hits the ground, then both the player and the ground will need colliders.
+
+### Capsule Collider
+From the Player object's inspector, select Add Component > Physics 2D > Capsule Collider 2D. With the mouse over the scene view, press the F key to focus on the player object.
+
+We want the collider to fit as closely as possible to the outline of the player. In the inspector, under the collider component, change the Direction dropdown to "Horizontal". At the top of that panel, click the button next to "Edit Collider". Then drag the top and bottom of the collider until they wrap nicely around the bird, like so:
+
+![](img/capsule_collider.png)
+
+### Box Collider
+Now, do the same thing for the ground! Add a 2D box collider component to the grass sprite just like we did for the player, and wrap it so it fits nicely. The bottom doesn't really matter as much as the top.
+
+Press the play button to test.
+
+Hah, stupid bird. He just falls and gets stuck on the bottom. Don't worry, we'll fix right just now:
+
+### Triggers
+![](https://media.giphy.com/media/vk7VesvyZEwuI/giphy.gif)
+
+There's a special behavior of colliders that we want to utilize here: a trigger. Triggers are used when we don't want the standard collider behavior of bouncing off each other. We can set the ground to be a trigger so that when the player collides with it, it *triggers* some function like, say, a gameOver boolean switches to true.
+
+To set this up, just check the box in the collider component labeled "Is Trigger".
+
+### Tags
+One other thing, before we get back to code. The trigger will need to be referenced somehow. The easiest way to do this is to add a tag to all trigger colliders that we consider obstacles. The ground is one, and the pillars will be the others. A tag is just a special property of a GameObject used for identification.
+
+For now, in the ground object's inspector, at the very top, click the dropdown labeled "Tag", and select "Add New". At this new menu, click the "+" icon, and enter "Obstacle".
+
+NOTE: You just created the tag, but you still have to apply it. Go back to the ground object's inspector and select "Obstacle" from the Tag dropdown.
+
+Okay, now we're ready! Back to the codes.
+
+## Game Controller
+So far, we've basically built a jumping bird. It could have its place, but it might be cool to actually make a game out of this. To keep track of all of the high-level game stuff, it would be good to keep it all in one script. The GameController will keep track of scoring, whether the game is currently running or if the player died, the current sprites being rendered, and eventually will even reload the scene when a player clicks the restart button.
+
+We'll go through this one step at a time.
+
+First, create a new Empty GameObject in the scene. To do that, above the hierarchy view, select "Create" > "Create Empty". Rename it "GameController". Then, add a new script component to it, and also call the script "GameController". Open the script for editing.
+
+### Triggering Game Over
+Paste the following two lines of code into your `GameController` script:
+
+```csharp
+public GameObject player;
+public static bool gameOver;
+```
+
+You know the drill. Save the script and attach the Player GameObject to the player variable in the editor.
+
+Note that we made the gameOver boolean `static`. We want only one instance of it per game, and we want it easily accessible to other classes. Why? The colliders that isn't a trigger is attached to the player. That means when it meets with a trigger collider, the functionality for this is dealt with by the Player GameObject. Open the PlayerController script for editing, and add in the following function:
+
+```csharp
+void OnTriggerEnter2D(Collider2D other) {
+	if (other.CompareTag("Obstacle")) {
+		Debug.Log ("Died");
+		GameController.gameOver = true;
+	}
+}
+```
+
+This is a special function that is called when the GameObject that this script is attached to intersects with a trigger collider. The trigger collider is passed to the function as `other`. We then check `other`'s tag, and if it is an obstacle, then we will set the gameOver boolean to true.
+
+Note the use of `Debug.Log`. This is Unity's print function, and it sends output straight to Unity's console. I'd recommend getting to know it pretty well, because it might save you quite a few times down the road.
+
+If you hit play, you should print "Died" to the console when your player touches the ground!
+
+### Changing Sprites on Trigger
+Sprites are actually pretty easy to deal with in Unity. We have two Sprites saved in our sprite folder that we want to make use of: the BirdEnemyIdleSprite (default) and BirdEnemyDeathSprite. Add some more variables to your `GameController`:
+
+```csharp
+public Sprite normalSprite;
+public Sprite deadSprite;
+
+private SpriteRenderer playerSprite;
+```
+
+In the inspector, drag the BirdEnemyIdleSprite onto normalSprite, and the BirdEnemyDeathSprite onto deadSprite.
+
+We already have a reference to the Player, so it's easy to get it's SpriteRenderer component. Put this in your `Start()` function:
+
+```csharp
+void Start () {
+	playerSprite = player.GetComponent<SpriteRenderer> ();
+}
+```
+
+As you might guess, this just returns the SpriteRenderer component of the Player object.
+
+Finally, replace the `Update()` function with these lines:
+
+```csharp
+void LateUpdate() {
+	if (gameOver) {
+		playerSprite.sprite = deadSprite;
+	}
+}
+```
+
+`LateUpdate()` runs once per frame, just like `Update()`. It just runs a little after `Update()` in the life cycle. So, we're guaranteed that all `Update()` methods have been called at the time of this method's execution. This is useful if, for example, we're pressing the Spacebar to make our player jump in the Update function of another script. There won't be any interference with the trigger collider, because the functions are called at different times!
+
+So what does the code do? It checks if the game is over, and if so, it replaces the character's idle sprite with a dead character sprite. Pretty simple! Your game should obey this if you test with the play button.
+
+It might also be good to disable player control once the bird dies. To do that, just change the `if` statement in the `Update()` function of your `PlayerController` script:
+
+```csharp
+if (!GameController.gameOver && Input.GetKeyDown (KeyCode.Space)) {
+	// other code
+}
+```
+
+That way, the Spacebar will only be counted as long as gameOver is false.
