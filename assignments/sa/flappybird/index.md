@@ -281,3 +281,244 @@ if (!GameController.gameOver && Input.GetKeyDown (KeyCode.Space)) {
 ```
 
 That way, the Spacebar will only be counted as long as gameOver is false.
+
+## Columns
+Alright, it's time we add some obstacles. Before we just go an add a bunch of column sprites in though, we should take care of something first.
+
+### The Sprite Editor
+Unity doesn't always expect us to import everything perfectly, so they kindly provided us with a Sprite Editor to make changes within the program. To access it for the column sprite, click on the column sprite in the Project view, and then click the "Sprite Editor" button in the inspector.
+
+![](img/sprite_editor.png)
+
+Now, let's quickly go over the concept of 9-splicing. The idea is that we can set a grid of nine squares around any object, so that when we resize it, Unity won't just resize everything equally (the default behavior). When we resize the column, for instance, we don't want the Ionic capital (the top part) to be much larger on a tall column than on a short one.
+
+To 9-splice the sprite, drag the green squares inward over the sprite. You're dragging the edges of the center tile of the 3x3 grid that makes up a 9-splice. Set this center tile to be at the center of the capital, like this:
+
+![](img/column-edit.png)
+
+Now, hit the "Apply" button near the top right, and close the editor.
+
+![](img/apply-button.png)
+
+Once back in Unity, still in the inspector tab for the Column sprite, select the dropdown menu for "Mesh Type" and select "Full Rect". This will allow you to utilize column splicing.
+
+Now we can add the column to our game. Drag the sprite into the hierarchy view. It doesn't appear yet, because it still belongs to the default sorting layer, and is instantiated behind the background. To fix that, add a new sorting layer called "Columns", and apply it to this column.
+
+To allow 9-splicing, you'll also need to set "Draw Mode" to "Sliced" in the column GameObject's inspector.
+
+Once that's done, resize it to a good size and set it so it goes from the top of the ground to about 40% of the way up the sky background.
+
+Finally, add a new BoxCollider2D component to the column, and fit it as best you can. Finally, change its tag to "Obstacle".
+
+Phew! Now we have a complete column obstacle object.
+
+## Prefabs
+We want more columns, but we don't want to have to go through all that inspector nonsense again. Luckily, there's a shortcut. Unity has a notion of *prefabs*, short for prefabrications. They allow you to store a template for a GameObject so you can instantiate the same thing over and over again. They have some bonus features too, which we'll see in a moment.
+
+Create a new folder, "Prefabs", in your Assets folder. Drag the column GameObject from your hierarchy over that folder. Notice that the `ColumnShortSprite` GameObject in the hierarchy has turned blue, to indicate that this GameObject is a prefab.
+
+Now, select that GameObject, and press `command+D` (or `control+D` on Windows) to *duplicate* it.
+
+In the duplicated GameObject's inspector, flip the SpriteRenderer in the Y direction, and drag it so its base is on the ceiling. Leave a little room for the bird to get through, of course.
+
+Keep duplicating columns (you can do multiple at a time) until you feel like there's enough of a level to be fun! Press play to test when you're done.
+
+### Updating a Prefab
+What's going on? The bird just crashes into our columns and stops dead. It's almost like that OnTriggerEnter2D function we wrote doesn't do anything.
+
+Wait...
+
+We forgot to check Is Trigger for all of our columns! That's gonna be a pain. Luckily, we were smart enough to save the column as a prefab. In the prefabs folder, click on your prefab, and in the inspector, set Is Trigger to true. This automatically applies to all instantiated prefabs in the scene (all of our columns) 🆒
+
+Should be working now, check it out!
+
+## UI
+I'm as amazed as you are, but no we still aren't done. Don't worry, we're almost there!
+
+We want to add some UI panels, so we can start and restart in-game, without having to restart the entire process. To start, let's add a new UI Panel to the hierarchy. Select "Create" > "UI" > "Panel".
+
+Wow, looks like we got more than we bargained for. The UI panel is massive, and only the bottom left corner appears in our scene view. We also have three new GameObjects, instead of just one: "Canvas", "Panel" (the one we wanted), and "EventSystem".
+
+All UI elements need to be children of the Canvas GameObject, so Unity created one for us. They all also need an EventSystem, which Unity also created for us.
+
+The cool thing about the canvas is that it doesn't render like the rest of the gameobjects in the scene. It's an overlay. It's highly recommended that you do all of the editing in the Game View instead of the Scene View like normal. That way, you can see how the panel will ultimately look in the Game.
+
+Once you're in the Game View, go to the inspector for the panel. Set the Left and Right to 150 and the Top and Bottom to 100 (in the Rect Transform component). Set the background to some pretty color, up to you.
+
+This panel is going to be our Start screen (you can rename it that if you'd like). We need some text and a button.
+
+### Text
+We can add a Text UI object as a child of the Panel. Right-click on the panel and select UI > Text. In the new text GameObject's Text component, change the text in the text box to say something like "FlappyBird v 1.0". Move the transform up in the y direction about 50 pixels or so.
+
+### Button
+Next, add a button in the same way we just added the text. Delete the button's child object, called Text. (Don't delete the sibling text object, that's the one we just made!)
+
+Now, you can attach the StartIdleSprite button sprite to the Button's Image component. Drag the sprite onto the Source Image property in the button's inspector (which should currently have something like "UI Sprite" in it). Resize the Rect Transform component until it looks nice, and move it down so it's balanced in the panel.
+
+### Script Changes
+There are a few things we should do to work with this new UI element, and we can do it all in the `GameController` script. Open it for editing.
+
+Replace the code in that script with the following code:
+
+```csharp
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameController : MonoBehaviour {
+
+	public GameObject player;
+	public static bool gameOver;
+
+	public Sprite normalSprite;
+	public Sprite deadSprite;
+
+	public GameObject startScreen;
+
+	private SpriteRenderer playerSprite;
+
+	void Awake () {
+		startScreen.SetActive (true);
+		player.SetActive (false);
+	}
+
+	// Use this for initialization
+	void Start () {
+		playerSprite = player.GetComponent<SpriteRenderer> ();
+		gameOver = false;
+	}
+
+	void LateUpdate() {
+		if (gameOver) {
+			playerSprite.sprite = deadSprite;
+		}
+	}
+
+	public void BeginGame() {
+		startScreen.SetActive (false);
+		player.SetActive (true);
+	}
+}
+```
+
+We added a few lines. The first is `public GameObject startScreen;`, which will hold a reference to that new panel we just made. We also added two functions:
+- `void Awake()` is another Unity lifecycle function. It is called before any of the `Start()` functions are called, so we can use it for things like setting active GameObjects. In this case, we set the player to inactive so it doesn't move until the game starts, and set the start screen to active so we can begin the game.
+- `public void BeginGame()` is our own function. It does the opposite of what we did on `Awake()`, and we will call it when we click the "Start" button on our UI panel.
+
+Save the script and return to Unity. We should link up our references in the inspector. Drag the Start Screen panel we just created onto the Start Screen variable referenced by the GameController script component on the `GameController` GameObject.
+
+### OnClick()
+Unity has a cool way of dealing with pointer events. Traditionally you may have used MouseEventListeners and ActionEventListeners, and we can use those, but there's an easier way.
+
+Select the button from the start screen and go to its inspector. If you scroll to the bottom, you'll see that theres a list, with "On Click ()" at the top. Click the "+" icon at the bottom of the list, and drag the `GameController` GameObject onto the space below "Runtime Only". Here's a gif:
+
+![](img/onclick-example.gif)
+
+Then, from the dropdown that currently says "No Function", select "GameController" > "BeginGame()". Note that this is the public function we just implemented in `GameController.cs`. We have to make it public so it's visible to the inspector, for this exact reason.
+
+Click play. The bird should disappear, but reappear when you hit the "Start" button!
+
+## Restart Panel
+Now we're getting somewhere. But we still need a restart panel. Duplicate the start panel so we have a good starting point.
+
+A few things to change.
+- The text. Change it to something like. "You died! Restart?"
+- The button. Change the sprite to the `RestartIdleSprite` sprite.
+- The script. Replace `GameController` with the following code:
+
+```csharp
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameController : MonoBehaviour {
+
+	public GameObject player;
+	public static bool gameOver;
+
+	public Sprite normalSprite;
+	public Sprite deadSprite;
+
+	public GameObject startScreen;
+	public GameObject restartScreen;
+
+	private SpriteRenderer playerSprite;
+
+	void Awake () {
+		startScreen.SetActive (true);
+		restartScreen.SetActive (false);
+		player.SetActive (false);
+	}
+
+	// Use this for initialization
+	void Start () {
+		playerSprite = player.GetComponent<SpriteRenderer> ();
+		gameOver = false;
+	}
+
+	void LateUpdate() {
+		if (gameOver) {
+			playerSprite.sprite = deadSprite;
+			restartScreen.SetActive (true);
+		}
+	}
+
+	public void BeginGame() {
+		startScreen.SetActive (false);
+		player.SetActive (true);
+	}
+
+	public void ReloadScene() {
+		// We'll fill this out in a second
+	}
+}
+```
+
+Same deal here, we just added in some active/inactive switches for the restart screen as well as the start screen. We also added that function at the bottom, `public void ReloadScene()`. This is what our `OnClick()` will call. Go ahead and set everything up. Drag the Restart Screen panel onto the restart screen public variable in the GameController, and set the `OnClick()` method for the Restart Screen's button to trigger `GameController.ReloadScene()`.
+
+## Reloading the Scene
+Alright, that should all be wired up. Now we just need to add the functionality for `ReloadScene()`. What should this function do? We basically want it to restart the game, and we aren't really persisting anything, so there's no shame in just restarting the entire scene from scratch.
+
+How do we do this? Unity has a `SceneManager` builtin class. To use it, you'll need to import its package. At the top of `GameController.cs`, add in
+
+```csharp
+using UnityEngine.SceneManagement;
+```
+
+Now that it's imported, we can use its most popular function. Add in this line inside the `ReloadScene()` function:
+
+```csharp
+SceneManager.LoadScene(0);
+```
+
+What does this do? It will load scene 0. The 0 refers to the build index of the scene to be loaded. To set that to be this current main scene, save the script and return to Unity.
+
+Once there, select File > Build Settings. This will open a new window. Directly below that upper panel, click the button that says, "Add Open Scenes". You'll notice that "Main" appears (if it wasn't there already) with a "0" next to it. This is its build index. As we build larger and larger games, we'll soon see this fill up with larger numbers of scenes.
+
+That's it! Save the scene, press play, and you can play FlappyBird as much as you want now.
+
+
+## And We Are Done!
+Congratulations! You grappled with a lot of stuff in this short assignment, but hopefully it all makes some sense. At the very least, you've built what may be your very first game, and it's a pretty fun one!
+
+If you'd like to export the game as a standalone, you can go back to the build settings menu and click "Build". Unity will generate an executable file for you (`.app` on Mac, `.exe` on Windows), and save it to the folder that this project is in. You can open it and run independently without Unity!
+
+Push this project up to your GitHub repo and write a short README describing how it went (details below).
+
+
+## To Turn In
+- Link to your Github repository, submitted to Canvas
+- The repo should contain a short file `README.md` with three sections
+	- What you did
+	- What worked/didn't work
+	- Any general comments/suggestions
+
+
+## Extra Credit
+There are lots of opportunities for extra credit here. Get creative!
+
+- Keep score each time the player successfully gets through columns
+- Keep a high score and persist it through scene reloading
+	- This is a little more challenging. You might want to make a specific empty GameObject to store it, and may want to look up the function `DontDestroyOnLoad` in the Unity docs.
+- Create some different 2D assets and replace the current ones with them.
+- Anything else you might want to try, if it seems like a worthy extension!
