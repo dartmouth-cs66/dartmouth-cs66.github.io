@@ -11,9 +11,9 @@ title: Assignments
 
 * [Short Assignment 1: Up and Running With Unity](sa/up-and-running/) — DUE 3/30
 * [Short Assignment 2: FlappyBird](sa/flappybird) — DUE 4/01
+* [Short Assignment 3: Space Adventure Main Menu](sa/mainmenu) — DUE 4/13
 
-<!-- * [Short Assignment 3: Webpack+Babel+Eslint starterpack](sa/starterpack) — DUE 4/13
-* [Short Assignment 4: React Intro](sa/react-videos) — DUE 4/19
+<!-- * [Short Assignment 4: React Intro](sa/react-videos) — DUE 4/19
 * [Short Assignment 5: Frontend Routing](sa/routing) — DUE 4/27
 * [Short Assignment 6: Redux](sa/redux) - DUE 4/30
 * [Short Assignment 7: Express and Mongo](sa/server-side) - DUE 5/10
