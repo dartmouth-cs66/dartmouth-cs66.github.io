@@ -9,9 +9,9 @@ title: Assignments
 ### *N* In-class short assignments: 10%
 *These will introduce collaborative coding and tools such as deployment and setting up local development environment as well as basics of designing and developing for the web.*
 
-* [Short Assignment 1: Up and Running With Unity](sa/up-and-running/) — DUE 3/30
-* [Short Assignment 2: FlappyBird](sa/flappybird) — DUE 4/01
-* [Short Assignment 3: Space Adventure Main Menu](sa/mainmenu) — DUE 4/13
+* [Short Assignment 1: Up and Running With Unity](sa/up-and-running/)
+* [Short Assignment 2: FlappyBird](sa/flappybird)
+* [Short Assignment 3: Space Adventure Main Menu](sa/mainmenu)
 
 <!-- * [Short Assignment 4: React Intro](sa/react-videos) — DUE 4/19
 * [Short Assignment 5: Frontend Routing](sa/routing) — DUE 4/27
