@@ -4,4 +4,7 @@ title: Resources
 permalink: /resources/
 ---
 
-coming soon
+# Game Play
+
+* [Game Types](gametypes/)
+* [2D Platformer](2dplatformer/)
