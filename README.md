@@ -2,7 +2,7 @@
 
 Source for the website for Dartmouth CS66.  Updated periodically.  Now includes slides and notes. Contribute at your leisure.
 
-**NOTE:** assignments tend to change without notice, so if you are taking the class please refer to canvas / the published site at [cs52.me](http://cs52.me).
+**NOTE:** assignments tend to change without notice, so if you are taking the class please refer to canvas / the published site at [cs66.me](http://cs66.me).
 
 <hr>
 
