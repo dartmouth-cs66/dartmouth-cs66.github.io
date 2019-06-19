@@ -69,9 +69,9 @@ Great! Now, to make this the default state, right-click on Idle and select "Set 
 ### Transitions
 We now have two states in our FSM, but no way of getting to the Walking state. Add a boolean parameter called "Moving" in the parameters tab on the left of the FSM. Then, right click on the idle state and select "Make Transition", and then click on the Walking state. An arrow should appear pointing from the Idle state to the Walking state. Make another transition from Walking to Idle as well.
 
-First, uncheck "Has Exit Time". Exit time allows for the current state animation to complete its cycle before transitioning. Often, this results in a major delay between states, so it's best to just not have it. Unity will interpolate the positioning of all of the skeletal joints to make the transition smooth anyway, so we don't really need to worry about the exit time.
+Now, select each of the transitions and uncheck the "Has Exit Time" option in the inspector. Exit time allows for the current state animation to complete its cycle before transitioning. Often, this results in a major delay between states, so it's best to just not have it. Unity will interpolate the positioning of all of the skeletal joints to make the transition smooth anyway, so we don't really need to worry about the exit time.
 
-Next, we want the animation to loop continuously, but by default animations play only once. To fix this, click on the parent GameObject in your hierarchy ("X@Idle") and go to the "Animation" tab in the Inspector. Near the bottom is a checkbox labeled "Loop Time". Check this box. Do the same for the Walking animation.
+Next, we want the animation to loop continuously, but by default animations play only once. To fix this, click on the prefab model in the project view ("X@Idle") and go to the "Animation" tab in the Inspector. Near the bottom is a checkbox labeled "Loop Time". Check this box. Do the same for the Walking animation ("X@Walking").
 
 Finally, back in the animator controller, set the conditions for the state transition from Idle to Walking. We have just one parameter, so it should be pretty straightforward. In the "Conditions" list on the right of the FSM (you may have to scroll down a little), click the "+" icon, and select Moving > True. Do the same for the transition from Walking to Idle (but select Moving > False).
 
