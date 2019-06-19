@@ -302,7 +302,7 @@ Now, hit the "Apply" button near the top right, and close the editor.
 
 Once back in Unity, still in the inspector tab for the Column sprite, select the dropdown menu for "Mesh Type" and select "Full Rect". This will allow you to utilize column splicing.
 
-Now we can add the column to our game. Drag the sprite into the hierarchy view. It doesn't appear yet, because it still belongs to the default sorting layer, and is instantiated behind the background. To fix that, add a new sorting layer called "Columns", and apply it to this column.
+Now we can add the column to our game. Drag the sprite into the hierarchy view. It doesn't appear yet, because it still belongs to the default sorting layer, and is instantiated behind the background. To fix that, add a new sorting layer: select the column gameObject and, on the inspector to the right, select "Sorting Layer" > "Add Sorting Layer". Name the new layer "Columns", then go back to the gameObject and apply the newly created layer to this column.
 
 To allow 9-splicing, you'll also need to set "Draw Mode" to "Sliced" in the column GameObject's inspector.
 
