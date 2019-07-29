@@ -43,7 +43,7 @@ Once there, search for "2D Sprites Pack". It should be one of the first results,
 Hit import. Unity should automatically place these sprites in the `Sprites` folder that you created in the last step.
 
 I've also found some open-source sprites for you to use online. You can download the Asset Package here. Unzip it and import everything from it.
-[Download](assets/space_pack.unitypackage.gz)
+[Download](https://github.com/dartmouth-cs66/dartmouth-cs66.github.io/raw/Space-Garbage/assignments/sa/space_mission/assets/space_pack.unitypackage.gz)
 
 ### A Few Notes On 2D
 This is the first time we're working in 2D, but don't worry! This should in theory simplify things by removing a whole dimension, and it does.
