@@ -14,8 +14,11 @@ Introduction to game development and specifically the areas of educational and s
 * Introduction to C#
 
 ### Assignments: 
-* Short 1: Local development environment including intro to environment, editing, and * collaborative coding.
-* Short 2: Intro to frameworks and tools
+* Short 1: Local development environment including intro to environment, editing, and collaborative coding.
+* Short 2 (**?combine with ^?**): Intro to frameworks and tools
+  * Set up local development tools
+  * Learn some basic C# and scripting
+  * Experiment with game physics and 3D motion
 
 ## Week 2:
 Introduction to 2D sprite based games.  Basic object interactions including colliders and raycasting.  Types of educational games.
@@ -29,7 +32,14 @@ Introduction to 2D sprite based games.  Basic object interactions including coll
 
 Assignments:
 * Short 3: Sprite-based 2D game introducing key events and sprite
+  * Understand 2D perspective
+  * Learn about sprites, collision detection and raycasting
+  * Use your knowledge to build a mini-game
+  * Extend and customize it to make it your own
 * Short 4:  Menu Systems and event-based UI programming
+  * Learn about skybox and menu screens
+  * Experiment with text, buttons, and layouts
+  * Practice event driven programming
 
 ## Week 3:
 More 2D with physics, rigid bodies, basic game logic patterns. How to deal with asynchronous inputs.  Intro to game mechanics, goals, and design process.
@@ -43,6 +53,9 @@ Topics:
 
 Assignments: 
 * Lab 1:  Build a sprite-based educational game that demonstrates all the concepts learned so far:  central game logic, physics interactions, event system. 
+  * Practice basic C# scripting
+  * Use your knowledge of events, sprites, game controllers, and colliders
+  * Build a full mini-game to show your understanding of these concepts
 
 ## Week 4:
 Intro to 3D space, 3D geometry, and calculating 3D space transforms. Working with cameras and viewpoints.  Intro to basic game AI concepts including pathfinding and navigation and multiple distributed agents.  Types of serious visualizations.
@@ -55,7 +68,12 @@ Topics:
 * Search
 
 Assignments: 
-* Short 5:  Small 3D visualization with multiple cameras and moving geometry.
+* Short: 3D Character Animation
+  * Learn about character animation, and character controls
+  * Experiment with prebuilt characters
+  * Extend your knowledge about 3D transforms and rotations
+* Short 5 (**? add to above ?**):  Small 3D visualization with multiple cameras and moving geometry.
+  * Learn camera control
 * Lab 2:  Build a 3D exploration learning game with pathfinding and multiple AI agents. 
 
 ## Week 5:

@@ -19,7 +19,6 @@ COSC 10 or permission of [instructor](mailto:tim@cs.dartmouth.edu).
   Longer weekly assignments that will each consist of a mini project involving a particular conceptual framework. Some of these will be collaborative.
 * 4 Short in-class quizzes: 10%
   Concepts and methods from lectures and labs.
-   
 * 1 group presentation and workshop: 10%
   Once during the term (in groups) students will present a short workshop on a game development topic to learn by teaching.
 * Group workshop and class participation: 10%
@@ -33,7 +32,7 @@ COSC 10 or permission of [instructor](mailto:tim@cs.dartmouth.edu).
 
 🏄 This class will be an adventure and requires active participation both inside and outside of class.
 
-By the end of this course, you will have:
+By the end of this course, you will:
 
 * 🔍 Understand the underlying concepts required to build digital games from the fields of graphics, ai, programming languages, and networks.
 * 🗺 Learn about applying serious game concepts to a variety of real-world situations such as disabilities, child developmental stages, literacy, immigration, health, workplace, or specific educational needs.
