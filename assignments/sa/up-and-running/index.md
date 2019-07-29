@@ -10,6 +10,11 @@ It's hard to take a class on game development without an environment to develop 
 
 This list is not at all exhaustive! There's plenty to explore in the upcoming weeks, and you'll be doing a lot of it yourself. But, by the end of this assignment, hopefully you'll start to feel comfortable enough that experimenting will be easier.
 
+## Objectives
+* Set up local development tools
+* Learn some basic C# and scripting
+* Experiment with game physics and 3D motion
+
 ## Unity
 ![](./img/unity.png)
 

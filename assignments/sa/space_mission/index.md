@@ -12,7 +12,7 @@ In this assignment, we'll be making a full game. It'll remind you of FlappyBird,
 
 To start, make a new Unity Project in 2D and open it.
 
-## Learning Objectives
+## Objectives
 
 * Understand 2D perspective
 * Learn about sprites, collision detection and raycasting

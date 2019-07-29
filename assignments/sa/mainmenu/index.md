@@ -25,6 +25,11 @@ Ultimately, we want to make the following:
 
 We'll walk through the basics of UI by creating the first of these, the main menu.
 
+## Objectives
+* Learn about skybox and menu screens
+* Experiment with text, buttons, and layouts
+* Practice event driven programming
+
 ## Getting Started
 First things first, you'll want to download our asset starterpack, which you can find [here](https://github.com/dali-lab/cs66-sa3-ui).
 

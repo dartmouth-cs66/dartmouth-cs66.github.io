@@ -6,11 +6,16 @@ published: true
 
 # 3D Animation
 
-![](https://media.giphy.com/media/UC1vtBU55vkTC/giphy.gif)
+<!-- ![](https://media.giphy.com/media/UC1vtBU55vkTC/giphy.gif) -->
 
 Welcome back! In this short assignment, we'll be walking through the basics of building animations into 3D projects. This short assignment will act as a starting point for our next lab, so everything you do here will be used in the next big assignment. Definitely make sure everything works now!
 
 Luckily, we don't have to do anything too involved, as there's a great program out there that can provide us with a bunch of preset and rigged models with their own animations, from our friends at Adobe.
+
+## Objectives
+* Learn about character animation, and character controls
+* Experiment with prebuilt characters
+* Extend your knowledge about 3D transforms and rotations
 
 
 ### Mixamo
