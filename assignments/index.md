@@ -10,7 +10,8 @@ title: Assignments
 *These will introduce collaborative coding and tools such as deployment and setting up local development environment as well as basics of designing and developing for the web.*
 
 * [Short Assignment 1: Up and Running With Unity](sa/up-and-running/)
-* [Short Assignment 2: FlappyBird](sa/flappybird)
+* [Short Assignment 2a: FlappyBird](sa/flappybird)
+* [Short Assignment 2b: Space Garbage](sa/space_mission)
 * [Short Assignment 3: Space Adventure Main Menu](sa/mainmenu)
 * [Short Assignment 4: 3D Animation](sa/3d-animation)
 
