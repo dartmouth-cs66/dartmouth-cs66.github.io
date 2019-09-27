@@ -17,7 +17,7 @@ Introduction to game development and specifically the areas of educational and s
 * Short 1: Local development environment including intro to environment, editing, and collaborative coding.
 * Short 2 (**?combine with ^?**): Intro to frameworks and tools
   * Set up local development tools
-  * Learn some basic C# and scripting
+  * Practice some basic C# and scripting
   * Experiment with game physics and 3D motion
 
 ## Week 2:
@@ -32,8 +32,8 @@ Introduction to 2D sprite based games.  Basic object interactions including coll
 
 Assignments:
 * Short 3: Sprite-based 2D game introducing key events and sprite
-  * Understand 2D perspective
-  * Learn about sprites, collision detection and raycasting
+  * Work with 2D perspective
+  * Create sprites, and use collision detection and raycasting
   * Use your knowledge to build a mini-game
   * Extend and customize it to make it your own
 * Short 4:  Menu Systems and event-based UI programming
@@ -69,11 +69,11 @@ Topics:
 
 Assignments: 
 * Short: 3D Character Animation
-  * Learn about character animation, and character controls
+  * Utilize character animations, and build character controls
   * Experiment with prebuilt characters
   * Extend your knowledge about 3D transforms and rotations
 * Short 5 (**? add to above ?**):  Small 3D visualization with multiple cameras and moving geometry.
-  * Learn camera control
+  * Implement camera control
 * Lab 2:  Build a 3D exploration learning game with pathfinding and multiple AI agents. 
 
 ## Week 5:
@@ -87,6 +87,7 @@ Topics:
 
 Assignments:
 * Lab 3:  Build a complex logic simulation style game (Oregon Trail) including NPC characters.
+  * 
 
 ## Week 6:
 Intro to shaders and the real-time rendering pipeline.  Intro to lighting (baked and real-time) and shadows.  Working with art assets.  A brief history of game aesthetics.
