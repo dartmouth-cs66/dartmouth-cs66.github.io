@@ -4,6 +4,9 @@ title: Dartmouth CS66
 ---
 
 
+# Game Development Principles Applied In Educational/Serious Games
+
+
 # ORC Description
 Digital games are a growing platform for education, entertainment, and visualization with a myriad of technological and theoretical challenges. This course explores the concepts and techniques involved in developing real-time 2D and 3D games, as well as the opportunities and constraints when applied to the field of serious games in areas such as education, healthcare, scientific visualization, emergency planning and response, government, and engineering. Topics include: 2d and 3d game engines, game ai, procedural generation, real-time rendering pipelines, game physics, shaders, game programming patterns, networked games, state synchronization, and game mechanics. Projects include building games from scratch such as an online multiplayer game with a server-side component.
 
