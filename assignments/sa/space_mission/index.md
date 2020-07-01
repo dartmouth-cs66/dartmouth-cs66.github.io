@@ -33,7 +33,7 @@ We're going to get assets for this project from a couple different places. We'll
 
 We can start by finding assets in the Asset Store. If an Asset Store tab is available in the Unity Editor, open it. Otherwise, open it up by going to Window->Asset Store.
 
-Once there, search for "2D Sprites Pack". It should be one of the first results, free, and made by Unity Technologies. Hit the download button, and when the window pops up on your screen to import the assets, select only the few that we'll need for the assignment:
+Once there, search for ["2D Sprites Pack"](https://assetstore.unity.com/packages/essentials/asset-packs/2d-sprites-pack-73728). It should be one of the first results, free, and made by Unity Technologies. Hit the download button, and when the window pops up on your screen to import the assets, select only the few that we'll need for the assignment:
 
 - AsteroidSprite
 - ExplosionSprite
@@ -42,8 +42,8 @@ Once there, search for "2D Sprites Pack". It should be one of the first results,
 
 Hit import. Unity should automatically place these sprites in the `Sprites` folder that you created in the last step.
 
-I've also found some open-source sprites for you to use online. You can download the Asset Package here. Unzip it and import everything from it.
-[Download](https://github.com/dartmouth-cs66/dartmouth-cs66.github.io/raw/Space-Garbage/assignments/sa/space_mission/assets/space_pack.unitypackage.gz)
+I've also found some open-source sprites for you to use online. You can download the Asset Package here. Import everything from it.
+[Download](assets/space_pack.unitypackage.gz)
 
 ### A Few Notes On 2D
 This is the first time we're working in 2D, but don't worry! This should in theory simplify things by removing a whole dimension, and it does.
