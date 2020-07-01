@@ -38,18 +38,18 @@ You should also download a git command prompt to make life easier when we work w
 
 Here’s some commandline basics:
 
-* ls -la will list files in current directory
-* pwd will show current directory
-* cd somedirectory will change directory to somedirectory
-* cp source target will copy files
-* mv source target will move
-* rm somefile will remove that file (permanently, bypassing trash)
-* mkdir somedirectory will create a folder (directory)
+* `ls -la` will list files in current directory
+* `pwd` will show current directory
+* `cd somedirectory` will change directory to somedirectory
+* `cp source target` will copy files
+* `mv source target` will move
+* `rm somefile` will remove that file (permanently, bypassing trash)
+* `mkdir somedirectory` will create a folder (directory)
 
 On OSX:
 
-* open somefile will open the file in the default app associated with it
-* open somedirectory will open that folder in Finder
+* `open somefile` will open the file in the default app associated with it
+* `open somedirectory` will open that folder in Finder
 
 ## Let's Get Going!
 After Unity is installed, go ahead and open it up. You'll most likely be seeing this screen:
