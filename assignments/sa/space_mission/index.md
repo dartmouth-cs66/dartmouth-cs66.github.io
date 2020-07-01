@@ -15,7 +15,8 @@ To start, make a new Unity Project in 2D and open it.
 ## Objectives
 
 * Understand 2D perspective
-* Learn about sprites, collision detection and raycasting
+* Learn about sprites, collision detection, and basic physics
+* Learn about UnityActions, both in scripts and in built-in UI elements like Buttons
 * Use your knowledge to build a mini-game
 * Extend and customize it to make it your own
 

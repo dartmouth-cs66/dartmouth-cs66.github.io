@@ -20,7 +20,9 @@ This list is not at all exhaustive! There's plenty to explore in the upcoming we
 
 🚀 Install [Unity](https://unity3d.com/get-unity/download). The Personal Edition is more than enough for this class. Unity is a game engine that was designed to democratize game development. It's super easy to learn and extremely powerful. We'll be using Unity for all of our development, except for script writing.
 
-🚀 Install [Visual Studio](https://www.visualstudio.com/downloads/). The Community Edition is fine. Visual Studio is a nice IDE that recently became available for Mac users in addition to the standard Windows userbase. It's a great IDE for C#, which is the language we'll be writing all of our scripts in.
+🚀 Option A: Install [Visual Studio](https://www.visualstudio.com/downloads/). The Community Edition is fine. Visual Studio is a nice IDE that recently became available for Mac users in addition to the standard Windows userbase. It's a great IDE for C#, which is the language we'll be writing all of our scripts in.
+
+🚀 Option B: Install [Jetbrains Rider](https://www.jetbrains.com/dotnet/promo/unity/) This is the BEST IDE to use with Unity and C#. For Dartmouth you can [download it here](https://e5.onthehub.com/WebStore/ProductsByMajorVersionList.aspx?cmi_cs=1&cmi_mnuMain=2027b68c-8d6a-e911-8115-000d3af41938&ws=3487b211-759b-e011-969d-0030487d8897&vsro=8)
 
 🚀 Install [GitHub Desktop](https://desktop.github.com/). We will be mostly using `git` from the commandline but installing the app gives us a nice git tree visualization.
 
@@ -36,18 +38,18 @@ You should also download a git command prompt to make life easier when we work w
 
 Here’s some commandline basics:
 
-* ls -la will list files in current directory
-* pwd will show current directory
-* cd somedirectory will change directory to somedirectory
-* cp source target will copy files
-* mv source target will move
-* rm somefile will remove that file (permanently, bypassing trash)
-* mkdir somedirectory will create a folder (directory)
+* `ls -la` will list files in current directory
+* `pwd` will show current directory
+* `cd somedirectory` will change directory to somedirectory
+* `cp source target` will copy files
+* `mv source target` will move
+* `rm somefile` will remove that file (permanently, bypassing trash)
+* `mkdir somedirectory` will create a folder (directory)
 
 On OSX:
 
-* open somefile will open the file in the default app associated with it
-* open somedirectory will open that folder in Finder
+* `open somefile` will open the file in the default app associated with it
+* `open somedirectory` will open that folder in Finder
 
 ## Let's Get Going!
 After Unity is installed, go ahead and open it up. You'll most likely be seeing this screen:
