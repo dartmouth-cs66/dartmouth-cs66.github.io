@@ -68,7 +68,7 @@ Press the play button to test.
 
 The satellite's falling down! That's not very realistic. Fortunately, we can just turn off gravity for the satellite (we're going to have to do this for most things here, because most of our objects are going to be orbiting in space!)
 
-Go to the Rigidbody 2D component on the satellite, and set the Gravity Scale to 0.
+Go to the `Rigidbody2D` component on the satellite, and set the Gravity Scale to 0.
 
 Still, you're not actually able to control the satellite in any way, which is quite sad. Let's fix that.
 
@@ -103,27 +103,30 @@ public class PlayerController : MonoBehaviour
 }
 ```
 
-What’s going on here? We create a public float called stabilizerForce. That has a default value, but can be edited in the editor. We also have a Rigidbody2D component that we initialize to point to the Rigidbody2D on the player object. (Recall that this script is attached to the Player GameObject. The gameObject.getComponent call will therefore get the component of the specified type that is also attached to this player GameObject.)
+What’s going on here? We create a public float called `stabilizerForce`. That has a default value, but can be edited in the editor. We also have a `Rigidbody2D` component that we initialize to point to the `Rigidbody2D` on the player object. (Recall that this script is attached to the Player `GameObject`. The `gameObject.getComponent` call will therefore get the component of the specified type that is also attached to this player `GameObject`.)
 
-In Update(), we are just listening for any time the user hits the up or down arrow buttons. When this happens, we add forces either up or down, depending on the button pressed.
+In `Update()`, we are just listening for any time the user hits the up or down arrow buttons. When this happens, we add forces either up or down, depending on the button pressed.
 
 ### Randomness
 
 Now it kind of feels like we have a little too much control over the satellite's motion. Making things too easy can get boring. Let's create some amount of randomness in the satellite's motion. 
 
-In the `PlayerController` script, create a new public float named randomness. Then, copy the lines below into the `Update` function. 
+In the `PlayerController` script, create a new public float named `randomness`. Then, copy the lines below into the `Update()` function. 
 
 ```csharp
 float random = Random.Range(-1.0f, 1.0f);
 rb2d.AddForce(new Vector2(0, random * randomness));
 ```
 
-Here, we're using Unity's in-built Random class to get a random float between -1 and 1, and then, after multiplying it by our randomness factor, adding it as a new force every frame. The random forces usually won't add up to crazy high amounts, because upwards and downwards forces cancel out, and because `random` will be equally as likely to be positive as negative.
+Here, we're using Unity's in-built `Random` class to get a random float between `-1` and `1`, and then, after multiplying it by our `randomness` factor, adding it as a new force every frame. The random forces usually won't add up to crazy high amounts, because upwards and downwards forces cancel out, and because `random` will be equally as likely to be positive as negative.
 
-You can play around with the randomness and stabilizerForce values in the Editor to get to an experience that you like.
+You can play around with the `randomness` and `stabilizerForce` values in the Editor to get to an experience that you like.
 
 ### Clamping Velocity
+
 You might notice that if you hit one direction arrow multiple times in close succession, the satellite starts to go really fast. This is because we are applying essentially a constant force over time. Recall that F=ma. Since force and mass are remaining constant, acceleration also remains constant, and a constant acceleration results in an exponentially increasing velocity.
+
+![](img/acceleration-2.png)
 
 We like realistic physics, but they have their place, and games like this bird aren't it. We want to make sure the player's velocity stays consistently in a specific range, so we want to `clamp` any value to that range. In your `PlayerController.cs` script, add in a public float `maxVelocity`, and add the following lines to your `Update()` function:
 
@@ -134,7 +137,9 @@ rb2d.velocity = new Vector2(
 );
 ```
 
-This sets the velocity of the satellite in each frame to stay the same in the x direction but clamps the y direction between the values of -maxVelocity and maxVelocity.
+This sets the velocity of the satellite in each frame to stay the same in the x direction but clamps the y direction between the values of `-maxVelocity` and `maxVelocity`.
+
+![](img/speed-limit.png)
 
 In the editor, play around with the values again until you find something you like, and press play to test.
 
