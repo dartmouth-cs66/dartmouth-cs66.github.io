@@ -44,6 +44,12 @@ By the end of this course, you will:
 * 🔬Evaluate the opportunities and constraints afforded by the techniques and practices you have learned in solving real-world challenges.
 * ✏️Design and build your own games-for-change in 2d and 3d spaces and use server-side APIs for complex multiplayer environments.
 
+## Waitlist:
+
+If you are interested in this course and are worried about getting in, there is a waitlist. This waitlist is 100% FIFO, 50% of the class gets in via Registrar course selection and up to an additional 50% through this waitlist afterwards. Getting on this waitlist does not guarantee a spot. This class is interactive and projects based so we are only able to scale it so far while retaining flexible projects and individualized attention. Regardless of waitlist status, please register for the course as you normally would during course selection, as the waitlist only kicks in after that. The current cap being considered for this course is 12 for the first iteration as it will be very experimental.
+
+📋 [Join the Waitlist](waitlist/)
+
 
 ### Class:
 
