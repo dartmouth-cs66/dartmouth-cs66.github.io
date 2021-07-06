@@ -60,23 +60,27 @@ Once that's open, click on the circle select button next to the property labeled
 
 For the Body geometry, select the one that's something like "X_diffuse" (the diffuse geometry for the body), and for all others, choose "X_FacialAnimMap". Now it should actually look something like your character!
 
-
 ### Animations!
+
 If you click on the parent GameObject in the scene, (should be named something like "X@Walking"), and then take a look at the inspector you'll see it has a component named "Animator", with a property called "Controller". Unfortunately, this property is currently set to "None" 😢 Let's fix that!
 
 Right click on your Animations folder, and select Create > Animator Controller. This will create a new finite state machine, which will allow us to select which animations will be played at which times (given particular inputs, etc). Name the new controller something meaningful, like "Player", and double click on it. This will open up the Animator tab, which contains a barebones finite state machine. To start it off, drag in your Walking animation (which you'll find under your prefab in the models folder). By default, since this is the first animation in the FSM, it will be the default state (signified by an orange color).
+
+![](img/default-animation-state.png)
 
 Wait, that's not what we want! The default state should be standing still, not walking. Let's head back to Mixamo and find an Idle animation. Once you've found one you want, download it as FBX for Unity and drag it into your models folder again. Find the animation in the prefab that results, and then drag that into your animator controller FSM.
 
 Great! Now, to make this the default state, right-click on Idle and select "Set as Layer Default State".
 
-
 ### Transitions
+
 We now have two states in our FSM, but no way of getting to the Walking state. Add a boolean parameter called "Moving" in the parameters tab on the left of the FSM. Then, right click on the idle state and select "Make Transition", and then click on the Walking state. An arrow should appear pointing from the Idle state to the Walking state. Make another transition from Walking to Idle as well.
 
 Now, select each of the transitions and uncheck the "Has Exit Time" option in the inspector. Exit time allows for the current state animation to complete its cycle before transitioning. Often, this results in a major delay between states, so it's best to just not have it. Unity will interpolate the positioning of all of the skeletal joints to make the transition smooth anyway, so we don't really need to worry about the exit time.
 
 Next, we want the animation to loop continuously, but by default animations play only once. To fix this, click on the prefab model in the project view ("X@Idle") and go to the "Animation" tab in the Inspector. Near the bottom is a checkbox labeled "Loop Time". Check this box. Do the same for the Walking animation ("X@Walking").
+
+[](img/animation-loop.png)
 
 Finally, back in the animator controller, set the conditions for the state transition from Idle to Walking. We have just one parameter, so it should be pretty straightforward. In the "Conditions" list on the right of the FSM (you may have to scroll down a little), click the "+" icon, and select Moving > True. Do the same for the transition from Walking to Idle (but select Moving > False).
 
@@ -84,10 +88,10 @@ All of our animations are now set up! But they don't apply to anything yet. On t
 
 Great! Now we just have to set up some controls. I think we already know what the next section involves...
 
-
 ### Scripting
 
 #### Player Controller
+
 Create a new script on the parent GameObject of the model we've been animating. Call it "PlayerController". Open the script for editing, and paste in the following code:
 
 ```csharp
